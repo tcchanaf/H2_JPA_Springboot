@@ -1,0 +1,39 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    url: jdbc:h2:file:./h2/db
+    username: sa
+    password: sa
+    platform: h2
+    driver-class-name: org.h2.Driver
+    hikari: 
+      minimum-idle: 5
+      maximum-pool-size: 20
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: H2HikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        use_sql_comments: true
+        format_sql: true
+  h2:
+    console:
+      # start h2 web console when the program start
+      enabled: true
+      # the URL to h2 web console: "/h2-console"
+      path: /h2-console
+      settings:
+        trace: false
+        # remote access h2 web console: false
+        web-allow-others: false
+
