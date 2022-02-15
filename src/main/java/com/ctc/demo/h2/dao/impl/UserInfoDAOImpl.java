@@ -19,6 +19,7 @@ import org.springframework.util.StringUtils;
 import com.ctc.demo.h2.dao.UserInfoDAO;
 import com.ctc.demo.h2.dto.criteria.QueryCriteriaDTO;
 import com.ctc.demo.h2.entity.UserInfo;
+import com.ctc.h2.enumtype.Gender;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -71,12 +72,15 @@ public interface UserInfoDAOImpl
 
 	@Override
 	@Transactional(readOnly = false)
+	//http://localhost:8081/create/banana/?gender=male&age=34
 	public default UserInfo createUser(String userName, String gender, Short age) {
 		UserInfo userInfo = new UserInfo();
 		userInfo.setUserName(userName);
-		userInfo.setGender(gender);
+		if (gender != null)
+			userInfo.setGender(Gender.parse(gender));
 		userInfo.setAge(age);
 		userInfo.setCreateDatetime(new Date());
+		
 		this.save(userInfo);
 
 		return userInfo;

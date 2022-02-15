@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ctc.demo.h2.dao.UserInfoDAO;
 import com.ctc.demo.h2.dto.criteria.QueryCriteriaDTO;
 import com.ctc.demo.h2.entity.UserInfo;
+import com.ctc.h2.enumtype.Gender;
 
 @RestController
 public class UserInfoManagerController {
@@ -166,7 +167,7 @@ public class UserInfoManagerController {
 		if (name != null)
 			userInfo.setUserName(name);
 		if (gender != null)
-			userInfo.setGender(gender);
+			userInfo.setGender(Gender.parse(gender));
 		if (age != null)
 			userInfo.setAge(age);
 
